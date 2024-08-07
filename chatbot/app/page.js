@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
 import {useState} from 'react';
-import {Box, Stack} from '@mui/material';
+import {Box, Button, Stack, TextField} from '@mui/material';
 
 export default function Home() {
     const [messages,setMessages] = useState([
@@ -56,6 +56,20 @@ export default function Home() {
                       </Box>
                     ))}
               </Stack>
+              <Stack
+                direction='row'
+                spacing={2}>
+                  <TextField
+                    label = "message"
+                    fullWidth
+                    value={message}
+                    onChange={(e)=> setMessage(e.target.value)}
+                  />
+                  <Button
+                    variant="contained">
+                    Send
+                  </Button>
+                </Stack>
             </Stack>
         </Box>
     )
