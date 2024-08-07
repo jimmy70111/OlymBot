@@ -21,5 +21,5 @@ export async function POST(req){
             
         }
     })
-    return new NextResponse.json({message:"Hello from the server!"})
+    return NextResponse.json({message:"Hello from the server!"})
 }
