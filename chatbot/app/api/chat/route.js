@@ -13,8 +13,7 @@ export async function POST(req) {
     if (userMessages.length > 0) {
       const userMessage = userMessages[userMessages.length - 1].content.toLowerCase();
 
-
-      // here is some ai generated try coded response 
+      // Here is some AI-generated response
       if (userMessage.includes("gold medals")) {
         responseText = "In the past few years, the top gold medal winners have been the USA, China, and Russia. The USA won 39 gold medals in the Tokyo 2020 Olympics, China won 38, and Japan won 27.";
       } else if (userMessage.includes("sports")) {
@@ -38,11 +37,12 @@ export async function POST(req) {
       } else {
         responseText = "I'm not sure how to help with that. Try asking about Olympic sports, gold medals, or type 'help' for more options.";
       }
-      
+    }
+  }
 
-  // return plain text instead of JSON
+  // Return plain text instead of JSON
   return new NextResponse(responseText, {
-    status: 200, 
+    status: 200,
     headers: { 'Content-Type': 'text/plain' }
   });
 }
