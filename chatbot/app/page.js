@@ -7,8 +7,7 @@ export default function Home() {
     const [messages,setMessages] = useState([
       {
       role:'assistant',
-      content:`Hi I'm the Olympic Info chatbot, how can I assist you today? Send one of the following for more information:
-      "gold medals", "sports", "countries", "schedule", "records", "history", "opening ceremony", "closing ceremony", "medal tally", "help".`},
+      content:`Hi I'm the Olympic Info chatbot, how can I assist you today?.`},
     ])
     //For the message in the textbox
     const [message, setMessage] = useState('')
