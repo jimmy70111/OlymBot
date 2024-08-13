@@ -11,9 +11,11 @@ export default function Home() {
     ])
     //For the message in the textbox
     const [message, setMessage] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     const sendMessage = async()=>{
-      if(!message.trim()) return;
+      if(!message.trim()||isLoading) return;
+      setIsLoading(true)
       setMessage('')
       setMessages((messages)=>[
         ...messages,
@@ -49,14 +51,15 @@ export default function Home() {
             })
             return reader.read().then(processText)
           })
-      })
-    }catch(error){
-      console.error('Error:', error)
-      setMessages((messages) => [
-        ...messages,
-        { role: 'assistant', content: "I'm sorry, but I encountered an error. Please try again later." },
-      ])
-    }
+        })
+      }catch(error){
+        console.error('Error:', error)
+        setMessages((messages) => [
+          ...messages,
+          { role: 'assistant', content: "I'm sorry, but I encountered an error. Please try again later." },
+        ])
+      }
+      setIsLoading(false)
     }
 
     return (
