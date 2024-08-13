@@ -1,7 +1,6 @@
-import { SYSTEM_ENTRYPOINTS } from 'next/dist/shared/lib/constants';
 import { NextResponse } from 'next/server';
 
-const sysPrompt = "You are a chatbot designed to answer questions specifically about the Olympics, past and current. Remind the user of your purpose if they stray from the topic of Olympics."
+const sysPrompt = "You are a chatbot designed to answer questions specifically about the Olympics. Remind the user of your purpose if they stray from the topic of Olympics and anything related to the Olympics."
 
 export async function POST(req) {
   const data = await req.json();

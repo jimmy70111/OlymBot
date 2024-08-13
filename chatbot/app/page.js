@@ -13,6 +13,7 @@ export default function Home() {
     const [message, setMessage] = useState('')
 
     const sendMessage = async()=>{
+      if(!message.trim()) return;
       setMessage('')
       setMessages((messages)=>[
         ...messages,
@@ -42,7 +43,7 @@ export default function Home() {
               ...otherMessages,
               {
                 ...lastMessage,
-              content:lastMessage.content+text,}
+              content:lastMessage.content+text}
             ])
           })
           return reader.read().then(processText)
