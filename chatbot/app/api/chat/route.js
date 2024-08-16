@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
-const config = require('./config.js');
 
-const sysPrompt = "You are a chatbot designed to answer questions specifically about the Olympics. Remind the user of your purpose if they stray from the topic of Olympics and anything related to the Olympics."
+const sysPrompt = "You are a chatbot designed to answer questions specifically about the Olympics. Remind the user of your purpose if they stray from the topic of Olympics and anything related to the Olympics.";
 
 export async function POST(req) {
   const data = await req.json();
@@ -9,7 +8,7 @@ export async function POST(req) {
   const completion = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${config.LLAMA_API_KEY}`,
+      "Authorization": `Bearer ${process.env.LLAMA_API_KEY}`, // Use the API key from environment variables
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
@@ -23,20 +22,22 @@ export async function POST(req) {
       "repetition_penalty": 1,
       //"stream": true
     })
-  })
+  });
+
   const apiResponseData = await completion.json();
-  // Assuming the API returns a 'choices' array with a 'text' field
+
+  // Assuming the API returns a 'choices' array with a 'message' field
   if (apiResponseData.choices && apiResponseData.choices.length > 0) {
     const responseText = apiResponseData.choices[0].message.content;
     return new NextResponse(responseText, {
-      status: 200,
+      status: 200, // Correct status code for successful responses
       headers: { 'Content-Type': 'text/plain' }
     });
   }
 
-  // Return plain text instead of JSON
+  // Return plain text if API response is not as expected
   return new NextResponse("Hello", {
-    status: 200,
+    status: 200, // Correct status code for successful responses
     headers: { 'Content-Type': 'text/plain' }
   });
 }
