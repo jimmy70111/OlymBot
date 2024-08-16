@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+const config = require('./config.js');
 
 const sysPrompt = "You are a chatbot designed to answer questions specifically about the Olympics. Remind the user of your purpose if they stray from the topic of Olympics and anything related to the Olympics."
 
@@ -8,7 +9,7 @@ export async function POST(req) {
   const completion = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${process.env.LLAMA_API_KEY}`,
+      "Authorization": `Bearer ${config.LLAMA_API_KEY}`,
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
